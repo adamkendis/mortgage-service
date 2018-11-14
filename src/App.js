@@ -39,11 +39,11 @@ export default class App extends React.PureComponent {
     return (
       <HouseIdContext.Provider value={this.state}>
         <div>
-          <Home
+          {/* <Home
             status={this.state.home}
             expand={this.handleClick}
             current={this.state.currentHouse}
-          />
+          /> */}
           <Mortgage
             status={this.state.mortgage}
             expand={this.handleClick}
