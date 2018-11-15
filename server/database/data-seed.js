@@ -4,6 +4,7 @@ const House = require('./House.js');
 const db = require('./index.js');
 
 const random = num => Math.ceil(Math.random() * num);
+const randomBetween = (min, max) => Math.floor(Math.random() * (max - min - 1) + min);
 
 const zestHistory = () => {
   let total = 300000;
@@ -49,7 +50,7 @@ const seedFunc = () => {
     const id = count;
     count++;
 
-    const zestimate = zestHistory();
+    const zestimate = randomBetween(100000, 500000);
     return {
       _id: id.toString(),
       address: faker.address.streetAddress(),
@@ -60,7 +61,7 @@ const seedFunc = () => {
       baths: 2.5 + 0.5 * Math.floor(Math.random() * 3),
       sqFt: 1150 + 10 * random(20),
       status: Math.random() < 0.5 ? 'For Sale' : 'Sold',
-      taxAssessment: zestimate[zestimate.length - 1] * 0.937,
+      taxAssessment: zestimate * 0.937,
     };
   });
 };
