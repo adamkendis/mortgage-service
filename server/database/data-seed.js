@@ -1,18 +1,44 @@
-// const mongoose = require('mongoose');
-// const House = require('./House.js');
-// const db = require('./index.js');
+
 const fs = require('fs');
 const casual = require('casual');
-const csv = require('fast-csv');
-var csvStream = csv.createWriteStream({headers: false}),
-  writeableStream = fs.createWriteStream('data.csv');
+const { Readable } = require('stream');
 
-writeableStream.on('finish', () => {
-  console.log('done writing');
-})
+const streams = {
+  1: fs.createWriteStream('data1.csv'),
+  2: fs.createWriteStream('data2.csv'),
+  3: fs.createWriteStream('data3.csv'),
+  4: fs.createWriteStream('data4.csv'),
+  5: fs.createWriteStream('data5.csv'),
+  6: fs.createWriteStream('data6.csv')
+};
 
 const random = num => Math.ceil(Math.random() * num);
 const randomBetween = (min, max) => Math.floor(Math.random() * (max - min - 1) + min);
+
+let count = 0;
+let records = 2000000;
+let stream = 1;
+
+const inStream = new Readable({
+  read() {
+    let zestimate = randomBetween(100000, 500000)
+    this.push(`${count.toString()},${casual.address1},${casual.city},${98100 + random(99)},${zestimate},${3 + Math.floor(Math.random() * 2.5)},${2.5 + 0.5 * Math.floor(Math.random() * 3)},${1150 + 10 * random(20)},${Math.random() < 0.5 ? 'For Sale' : 'Sold'},${zestimate * 0.937}\n`);
+    count++;
+    if (count === 10050000) {
+      this.push(null);
+    }
+    if (count === records) {
+      records += 2000000;
+      this.pause()
+      this.unpipe(streams[stream]);
+      stream++;
+      this.pipe(streams[stream]);
+      this.resume()
+    }
+  }
+});
+
+inStream.pipe(streams[stream]);
 
 // const zestHistory = () => {
 //   let total = 300000;
@@ -51,57 +77,39 @@ const randomBetween = (min, max) => Math.floor(Math.random() * (max - min - 1) +
 //     return total + random(7000);
 //   });
 // };
-let count = 0;
 
-const seedFunc = () => {
-  const id = count;
-  count++;
-
-  const zestimate = randomBetween(100000, 500000);
-
-  return {
-    _id: id.toString(),
-    address: casual.address1,
-    city: casual.city,
-    zip: 98100 + random(99),
-    zestimate,
-    beds: 3 + Math.floor(Math.random() * 2.5),
-    baths: 2.5 + 0.5 * Math.floor(Math.random() * 3),
-    sqFt: 1150 + 10 * random(20),
-    status: Math.random() < 0.5 ? 'For Sale' : 'Sold',
-    taxAssessment: zestimate * 0.937,
-  };
-};
+/*
+---------------Writes 10mil records in ~2 min, ~3.47gb peak mem usage-------------------
 
 const writeCsv = async () => {
-  console.time('writeCsv');
-  var batches = 2000;
+  // console.time('writeCsv');
+  var csvStream = csv.createWriteStream({headers: false}),
+  writeableStream = fs.createWriteStream('data.csv');
+
+  writeableStream.on('finish', () => {
+    console.log('done writing');
+  });
+
+  var batches = 200;
   var count = 0;
 
   csvStream.pipe(writeableStream);
 
   while (count < batches) {
-    csvStream.cork();
+    // csvStream.cork();
     count++;
     for (var i = 0; i < 5000; i++) {
-      await csvStream.write(seedFunc());
+      let record = seedFunc()
+      await csvStream.write(record);
     }
-    csvStream.uncork()
+    global.gc();
+    // csvStream.uncork()
   }
 
   await csvStream.end();
-  console.timeEnd('writeCsv');
+  // console.timeEnd('writeCsv');
 };
 
 writeCsv();
-
-// const seed = seedFunc();
-// module.exports = seedFunc;
-
-// const seedDatabase = () => {
-//   House.create(seed)
-//     .then(() => mongoose.connection.close())
-//     .catch(err => console.error(err));
-// };
-
-// seedDatabase();
+-----------------------------------------------------------------------------------------
+*/
