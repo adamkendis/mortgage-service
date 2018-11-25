@@ -27,14 +27,14 @@ const inStream = new Readable({
     if (count === 10050000) {
       this.push(null);
     }
-    if (count === records) {
-      records += 2000000;
-      this.pause()
-      this.unpipe(streams[stream]);
-      stream++;
-      this.pipe(streams[stream]);
-      this.resume()
-    }
+    // if (count === records) {
+    //   records += 2000000;
+    //   this.pause()
+    //   this.unpipe(streams[stream]);
+    //   stream++;
+    //   this.pipe(streams[stream]);
+    //   this.resume()
+    // }
   }
 });
 
