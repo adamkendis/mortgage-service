@@ -25,6 +25,7 @@
     "graphql": "^14.0.2",
     "graphql-tools": "^4.0.2",
     "knex": "^0.15.2",
+    "knex-csv-seeder": "^0.4.1",
     "moment": "^2.22.2",
     "mongoose": "^5.3.7",
     "mongoose-simple-random": "^0.4.1",
@@ -62,5 +63,8 @@
   "jest": {
     "setupTestFrameworkScriptFile": "<rootDir>/src/spec/setupTests.js",
     "testEnvironment": "jsdom"
+  },
+  "resolutions": {
+    "babel-core": "7.0.0-bridge.0"
   }
 }
