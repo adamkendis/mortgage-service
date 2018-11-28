@@ -2,7 +2,7 @@
 module.exports = {
 
   development: {
-    client: 'mariadb',
+    client: 'mysql',
     connection: {
       port: process.env.RDS_PORT || 3306,
       host: process.env.RDS_HOSTNAME || 'localhost',
@@ -11,10 +11,10 @@ module.exports = {
       database: process.env.RDS_DB_NAME || 'mortgage'
     },
     migrations: {
-      directory: __dirname + 'server/database/migrations'
+      directory: __dirname + '/server/database/migrations'
     },
     seeds: {
-      directory: __dirname + 'server/database/seeds/development'
+      directory: __dirname + '/server/database/seeds/development'
     }
   }
 
