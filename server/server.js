@@ -1,11 +1,11 @@
-import schema from './schema.js';
-
+require('newrelic');
 const cors = require('cors');
 const express = require('express');
 const graphqlHTTP = require('express-graphql');
 const path = require('path');
-
 const app = express();
+
+import schema from './schema.js';
 
 app.use(cors());
 app.use(express.static(`${__dirname}/../public`));
