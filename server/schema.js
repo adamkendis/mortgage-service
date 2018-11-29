@@ -3,20 +3,24 @@ import resolvers from './resolvers.js';
 
 const typeDefs = `
   type Home {
-    _id: String!
+    _id: Int
     address: String!
     city: String!
-    zestimate: [Int]!
+    zestimate: Int!
     beds: Int!
     baths: Float!
-    sqFt: Int!
+    sqft: Int!
     status: String!
-    taxAssessment: Float!
+    taxassessment: Float!
   }
 
   type Query {
     allHouses: [Home]
     getSome(num: [Int]!): [Home]
+  }
+
+  type Mutation {
+    insertHouse(id: Int!): Home
   }
   
 `;

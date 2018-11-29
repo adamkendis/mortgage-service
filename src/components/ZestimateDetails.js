@@ -59,7 +59,7 @@ export default class ZestimateDetails extends React.PureComponent {
                   address
                   beds
                   baths
-                  sqFt
+                  sqft
                   zestimate
                   status
                   taxAssessment
