@@ -6,7 +6,7 @@ import App from '../App';
 export const PreQuery = () => {
   let rand = [Math.floor(Math.random() * 100)];
   const houseId = Number(window.location.pathname.replace(/\//, ''));
-  if (houseId && houseId >= 0 && houseId < 100) {
+  if (houseId && houseId >= 0 && houseId < 10000001) {
     rand = [houseId];
   }
   return (
@@ -19,9 +19,9 @@ export const PreQuery = () => {
             zestimate
             beds
             baths
-            sqFt
+            sqft
             status
-            taxAssessment
+            taxassessment
           }
         }
       `}

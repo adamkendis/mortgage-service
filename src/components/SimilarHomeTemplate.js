@@ -1,5 +1,5 @@
 import React from 'react';
-import faker from 'faker';
+// import faker from 'faker';
 
 const SimilarHomeTemplate = ({ houses, start, stop }) => {
   const numberWithCommas = x => x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
@@ -54,7 +54,7 @@ beds •
               {house.baths}
               {' '}
 ba •
-              {house.sqFt}
+              {house.sqft}
               {' '}
 sqft
             </div>
@@ -72,7 +72,7 @@ sqft
             ? `${sellIncrease}%`
             : start === 20
               ? `$${numberWithCommas(Math.floor(house.taxAssessment * 0.64))}`
-              : `$${Math.floor(zestimate / house.sqFt)}`}
+              : `$${Math.floor(zestimate / house.sqft)}`}
         </h3>
       </div>
     );

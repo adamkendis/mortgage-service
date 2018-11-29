@@ -14,7 +14,7 @@ export default class MortgageChart extends React.Component {
     return (
       <PieChart width={500} height={300}>
         <Pie
-          datakey="value"
+          dataKey="value"
           data={this.props.data}
           cx={300}
           cy={200}

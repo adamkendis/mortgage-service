@@ -1,4 +1,3 @@
-import mongoose from 'mongoose';
 import schema from './schema.js';
 
 const cors = require('cors');
@@ -8,29 +7,11 @@ const path = require('path');
 
 const app = express();
 
-mongoose.Promise = global.Promise;
-mongoose.connect(
-  'mongodb://localhost/houses',
-  { useNewUrlParser: true },
-);
-
 app.use(cors());
 app.use(express.static(`${__dirname}/../public`));
 
 app.get('/:urlId', (req, res) => {
   res.sendFile(path.join(`${__dirname}/../public/index.html`));
-});
-
-app.put('./:urlId', (req, res) => {
-
-});
-
-app.post('./:urlId', (req, res) => {
-
-});
-
-app.delete('./:urlId', (req, res) => {
-
 });
 
 app.use(
