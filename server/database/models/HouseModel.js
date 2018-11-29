@@ -1,3 +1,4 @@
+// Model for Cassandra DB
 
 module.exports = {
   fields: {
