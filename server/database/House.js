@@ -15,9 +15,10 @@ module.exports = {
   create: () => {
     console.log('Create route hit');
   },
-  read: async (houseId) => {
-    const { rows } = await knex('house').where('_id', houseId);
-    return rows;
+  read: async (...houseId) => {
+    const record = await knex('house').where('_id', houseId);
+    console.log(record)
+    return record;
   },
   update: () => {
     console.log('Update route hit');
