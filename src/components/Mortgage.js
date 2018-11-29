@@ -145,7 +145,7 @@ class MortgageBase extends React.PureComponent {
       <HouseIdContext.Consumer>
         {({ currentHouse }) => {
           const zestimate = Math.floor(
-            currentHouse.zestimate[currentHouse.zestimate.length - 1],
+            currentHouse.zestimate,
           );
           const dPayment = Math.floor(zestimate * (this.state.interest / 100));
           this.zestimate = zestimate;
@@ -239,7 +239,7 @@ class MortgageBase extends React.PureComponent {
                     type="checkbox"
                     id="tax-insurance-checkbox"
                     onClick={this.checkTaxAndInsurance}
-                    checked
+                    defaultChecked
                   />
                   <label>Include taxes/insurance</label>
                   <br />
