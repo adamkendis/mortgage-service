@@ -1,3 +1,4 @@
+// Migration for MariaDB
 
 exports.up = function(knex, Promise) {
   return Promise.all([
@@ -11,7 +12,7 @@ exports.up = function(knex, Promise) {
       table.decimal('baths');
       table.integer('sqft');
       table.string('status', 10);
-      table.decimal('hostName', 10, 2);
+      table.decimal('taxassessment', 10, 2);
     }),
   ]);
 };
