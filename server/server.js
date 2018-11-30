@@ -27,7 +27,7 @@ const getHouse = (req, res) => {
   let houseId = req.params.urlId;
   knex('house').where('_id', houseId)
     .then(data => {
-      client.set(houseId, data, 'EX', 3600);
+      client.set(houseId, JSON.stringify(data), 'EX', 3600);
       res.send(data); 
     })
     .catch(err => console.log('Error sending data to client: ', err))
