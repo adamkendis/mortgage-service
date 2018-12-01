@@ -31,6 +31,9 @@
 /reports/
 .sass-cache/
 *.log
+*.csv
+newrelic.js
+newrelic_agent.log
 
 
 #---------------------------------------#
